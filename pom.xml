@@ -41,6 +41,12 @@
             <artifactId>sendgrid-java</artifactId>
             <version>4.10.3</version>
         </dependency>
+        <dependency>
+            <!-- Dotenv pour charger les variables d'environnement depuis .env -->
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.2</version>
+        </dependency>
 
         <dependency>
             <!-- JPA -->
