@@ -183,11 +183,11 @@ INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
 (8, 8, 100), (8, 18, 75), (8, 28, 80), (8, 38, 70), (8, 48, 60);
 
 INSERT INTO FOURNISSEUR (NOM, EMAIL) VALUES
-('fournisseur1', 'baudrysouvignet07+fournisseur1@gmail.com'),
-('fournisseur2', 'baudrysouvignet07+fournisseur2@gmail.com'),
-('fournisseur3', 'baudrysouvignet07+fournisseur3@gmail.com'),
-('fournisseur4', 'baudrysouvignet07+fournisseur4@gmail.com'),
-('fournisseur5', 'baudrysouvignet07+fournisseur5@gmail.com');
+('fournisseur1', 'mahdisfayhi@gmail.com'),
+('fournisseur2', 'mahdisfayhi@gmail.com'),
+('fournisseur3', 'mahdisfayhi@gmail.com'),
+('fournisseur4', 'mahdisfayhi@gmail.com'),
+('fournisseur5', 'mahdisfayhi@gmail.com');
 
 INSERT INTO FOURNISSEUR_CATEGORIES (FOURNISSEUR_ID, CATEGORIE_CODE) VALUES
 (1, 1), (2, 1),
