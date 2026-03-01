@@ -60,13 +60,14 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Integer>
     """)
     List<Object> medicamentsCommandesPourV2(Integer codeCategorie);
 
-
-
     @Query("""
        SELECT m from Medicament m
        WHERE m.indisponible = false
        AND m.unitesEnStock > m.unitesCommandees
      """)
     List<Medicament> medicamentsDisponibles();
+
+    @Query("SELECT m FROM Medicament m WHERE m.unitesEnStock < m.niveauDeReappro")
+    List<Medicament> findMedicamentsACommander();
 
 }

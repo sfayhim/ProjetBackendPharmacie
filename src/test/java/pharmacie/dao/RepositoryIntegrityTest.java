@@ -1,14 +1,22 @@
 package pharmacie.dao;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import pharmacie.entity.*;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import pharmacie.entity.Categorie;
+import pharmacie.entity.Commande;
+import pharmacie.entity.Dispensaire;
+import pharmacie.entity.Ligne;
+import pharmacie.entity.Medicament;
 /**
  * Un jeu de tests vérifiant l'intégrité des données dans la base de données
  * Note : Les contraintes d'intégrité au moment où on enregistre les objets dans la BD.

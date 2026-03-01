@@ -14,12 +14,12 @@ INSERT INTO CATEGORIE (CODE, LIBELLE, DESCRIPTION) VALUES
 (8, 'Médicaments Cardiovasculaires', 'Médicaments pour le cœur et la circulation'),
 (9, 'Médicaments Gastro-intestinaux', 'Médicaments pour les troubles digestifs'),
 (10, 'Médicaments Respiratoires', 'Médicaments pour les troubles respiratoires');
-ALTER TABLE Categorie ALTER COLUMN code RESTART WITH 11;
+ALTER SEQUENCE categorie_code_seq RESTART WITH 11;
 
 -- Catégorie 1: Antalgiques et Antipyrétiques
 INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, UNITES_EN_STOCK, UNITES_COMMANDEES, NIVEAU_DE_REAPPRO, INDISPONIBLE, imageURL) VALUES
-('Paracétamol 500mg', 1, 'Boîte de 16 comprimés', 2.50, 25, 0, 50, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
-('Paracétamol 1000mg', 1, 'Boîte de 8 comprimés', 3.20, 350, 0, 40, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
+('Paracétamol 500mg', 1, 'Boîte de 16 comprimés', 2.50, 5, 0, 50, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
+('Paracétamol 1000mg', 1, 'Boîte de 8 comprimés', 3.20, 3, 0, 40, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
 ('Ibuprofène 200mg', 1, 'Boîte de 20 comprimés', 3.80, 400, 0, 45, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
 ('Ibuprofène 400mg', 1, 'Boîte de 12 comprimés', 4.50, 320, 0, 35, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
 ('Aspirine 500mg', 1, 'Boîte de 20 comprimés', 2.90, 450, 0, 50, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'),
@@ -32,9 +32,9 @@ INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, 
 -- Catégorie 2: Anti-inflammatoires
 INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, UNITES_EN_STOCK, UNITES_COMMANDEES, NIVEAU_DE_REAPPRO, INDISPONIBLE, imageURL) VALUES
 ('Diclofénac 50mg', 2, 'Boîte de 20 comprimés', 5.60, 300, 0, 35, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
-('Kétoprofène 100mg', 2, 'Boîte de 12 gélules', 6.80, 20, 0, 30, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
-('Naproxène 550mg', 2, 'Boîte de 16 comprimés', 7.20, 20, 0, 25, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
-('Célécoxib 200mg', 2, 'Boîte de 30 gélules', 15.90, 10, 0, 20, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
+('Kétoprofène 100mg', 2, 'Boîte de 12 gélules', 6.80, 2, 0, 30, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
+('Naproxène 550mg', 2, 'Boîte de 16 comprimés', 7.20, 200, 0, 25, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
+('Célécoxib 200mg', 2, 'Boîte de 30 gélules', 15.90, 180, 0, 20, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
 ('Indométacine 25mg', 2, 'Boîte de 30 gélules', 8.50, 150, 0, 20, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
 ('Piroxicam 20mg', 2, 'Boîte de 10 gélules', 9.30, 120, 0, 15, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'),
 ('Méloxicam 15mg', 2, 'Boîte de 14 comprimés', 11.20, 160, 0, 18, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
@@ -49,8 +49,8 @@ INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, 
 ('Azithromycine 250mg', 3, 'Boîte de 6 comprimés', 9.80, 280, 0, 30, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
 ('Ciprofloxacine 500mg', 3, 'Boîte de 10 comprimés', 12.30, 220, 0, 25, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
 ('Clarithromycine 500mg', 3, 'Boîte de 14 comprimés', 14.60, 180, 0, 20, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
-('Métronidazole 500mg', 3, 'Boîte de 20 comprimés', 6.70, 30, 0, 32, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
-('Doxycycline 100mg', 3, 'Boîte de 15 comprimés', 8.90, 20, 0, 28, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
+('Métronidazole 500mg', 3, 'Boîte de 20 comprimés', 6.70, 300, 0, 32, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
+('Doxycycline 100mg', 3, 'Boîte de 15 comprimés', 8.90, 250, 0, 28, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
 ('Céfixime 200mg', 3, 'Boîte de 10 comprimés', 11.40, 190, 0, 22, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'),
 ('Lévofloxacine 500mg', 3, 'Boîte de 7 comprimés', 15.80, 160, 0, 18, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
 ('Clindamycine 300mg', 3, 'Boîte de 16 gélules', 13.20, 140, 0, 16, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400');
@@ -63,8 +63,8 @@ INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, 
 ('Ramipril 5mg', 4, 'Boîte de 30 comprimés', 7.50, 350, 0, 35, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'),
 ('Énalapril 10mg', 4, 'Boîte de 28 comprimés', 6.80, 400, 0, 40, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
 ('Valsartan 80mg', 4, 'Boîte de 28 comprimés', 9.20, 320, 0, 32, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
-('Candésartan 8mg', 4, 'Boîte de 30 comprimés', 10.50, 20, 0, 28, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
-('Bisoprolol 5mg', 4, 'Boîte de 30 comprimés', 5.90, 30, 0, 38, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
+('Candésartan 8mg', 4, 'Boîte de 30 comprimés', 10.50, 280, 0, 28, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
+('Bisoprolol 5mg', 4, 'Boîte de 30 comprimés', 5.90, 380, 0, 38, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
 ('Métoprolol 50mg', 4, 'Boîte de 60 comprimés', 8.40, 340, 0, 34, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
 ('Hydrochlorothiazide 25mg', 4, 'Boîte de 30 comprimés', 4.20, 420, 0, 42, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400');
 
@@ -73,7 +73,7 @@ INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, 
 ('Metformine 500mg', 5, 'Boîte de 60 comprimés', 3.50, 500, 0, 50, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
 ('Metformine 850mg', 5, 'Boîte de 60 comprimés', 4.80, 450, 0, 45, false, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'),
 ('Gliclazide 30mg', 5, 'Boîte de 30 comprimés', 6.90, 320, 0, 32, false, 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=400'),
-('Glimépiride 2mg', 5, 'Boîte de 30 comprimés', 7.20, 20, 0, 28, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
+('Glimépiride 2mg', 5, 'Boîte de 30 comprimés', 7.20, 280, 0, 28, false, 'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400'),
 ('Sitagliptine 100mg', 5, 'Boîte de 28 comprimés', 45.80, 150, 0, 15, false, 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400'),
 ('Vildagliptine 50mg', 5, 'Boîte de 56 comprimés', 42.50, 180, 0, 18, false, 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'),
 ('Empagliflozine 10mg', 5, 'Boîte de 30 comprimés', 48.90, 120, 0, 12, false, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
@@ -169,7 +169,7 @@ INSERT INTO COMMANDE (NUMERO, SAISIELE, ENVOYEELE, DISPENSAIRE_CODE, PORT, REMIS
 (6, '2024-03-10', '2024-03-13', 'DSP06', 10.00, 5.50, 'Dispensaire Rufisque', '34 Avenue Blaise Diagne', '11000', 'Rufisque', 'Dakar', 'Sénégal'),
 (7, '2024-03-20', NULL, 'DSP07', 22.00, 4.50, 'Dispensaire Louga', '67 Rue Abdoulaye Wade', '50000', 'Louga', 'Louga', 'Sénégal'),
 (8, '2024-04-05', '2024-04-08', 'DSP08', 30.00, 7.00, 'Dispensaire Tambacounda', '23 Avenue Demba Diop', '23000', 'Tambacounda', 'Tambacounda', 'Sénégal');
-ALTER TABLE Commande ALTER COLUMN numero RESTART WITH 9;
+ALTER SEQUENCE commande_numero_seq RESTART WITH 9;
 
 -- Insertion des lignes de commande
 INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
