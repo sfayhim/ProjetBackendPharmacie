@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Dispensaires</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Liste des Dispensaires</h1>
+        <p><a href="index.html">← Retour</a></p>
+        
+        <div id="loading">Chargement...</div>
+        <div id="content" style="display:none;">
+            <div id="dispensaires"></div>
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/dispensaires')
+            .then(response => response.json())
+            .then(data => {
+                const dispensaires = data._embedded.dispensaires;
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                
+                const html = `
+                    <p><strong>${dispensaires.length}</strong> dispensaires enregistrés</p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Ville</th>
+                                <th>Région</th>
+                                <th>Téléphone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${dispensaires.map(d => `
+                                <tr>
+                                    <td><strong>${d.nom}</strong></td>
+                                    <td>${d.ville}</td>
+                                    <td>${d.region}</td>
+                                    <td>${d.telephone || '-'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                document.getElementById('dispensaires').innerHTML = html;
+            })
+            .catch(error => {
+                document.getElementById('loading').innerHTML = `<p style="color: red;">❌ Erreur: ${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>

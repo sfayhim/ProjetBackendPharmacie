@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Médicaments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>💊 Liste des Médicaments</h1>
+        <p><a href="index.html">← Retour</a></p>
+        
+        <div id="loading">Chargement...</div>
+        <div id="content" style="display:none;">
+            <input type="text" id="search" placeholder="🔍 Rechercher un médicament..." style="width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px; border: 2px solid #ddd; border-radius: 4px;">
+            <div id="medicaments"></div>
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/medicaments')
+            .then(response => response.json())
+            .then(data => {
+                const medicaments = data._embedded.medicaments;
+                displayMedicaments(medicaments);
+                
+                document.getElementById('search').addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filtered = medicaments.filter(m => 
+                        m.nom.toLowerCase().includes(searchTerm)
+                    );
+                    displayMedicaments(filtered);
+                });
+            })
+            .catch(error => {
+                document.getElementById('loading').innerHTML = `<p style="color: red;">❌ Erreur: ${error.message}</p>`;
+            });
+
+        function displayMedicaments(medicaments) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            
+            const html = `
+                <p><strong>${medicaments.length}</strong> médicaments trouvés</p>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Stock</th>
+                            <th>Seuil Réappro</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${medicaments.map(m => `
+                            <tr>
+                                <td><strong>${m.nom}</strong><br><small>${m.quantiteParUnite}</small></td>
+                                <td>${m.prixUnitaire.toFixed(2)} €</td>
+                                <td>${m.unitesEnStock}</td>
+                                <td>${m.niveauDeReappro}</td>
+                                <td>${m.unitesEnStock < m.niveauDeReappro ? 
+                                    '<span style="color: red;">⚠️ Stock bas</span>' : 
+                                    '<span style="color: green;">✅ OK</span>'}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('medicaments').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

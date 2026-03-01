@@ -29,7 +29,10 @@ public class ReapprovisionnementService {
     public void envoyerDemandesDevis() {
         List<Medicament> medicamentsACommander = medicamentRepository.findMedicamentsACommander();
 
+        log.info("🔍 Nombre de médicaments à commander: {}", medicamentsACommander.size());
+        
         if (medicamentsACommander.isEmpty()) {
+            log.info("✅ Aucun médicament à commander");
             return;
         }
 
@@ -38,6 +41,8 @@ public class ReapprovisionnementService {
         for (Medicament med : medicamentsACommander) {
             Categorie cat = med.getCategorie();
             List<Fournisseur> fournisseurs = cat.getFournisseurs();
+            log.debug("  - {} (stock: {}, seuil: {}) - {} fournisseurs", 
+                med.getNom(), med.getUnitesEnStock(), med.getNiveauDeReappro(), fournisseurs.size());
 
             for (Fournisseur fournisseur : fournisseurs) {
                 articlesParFournisseur
@@ -47,6 +52,9 @@ public class ReapprovisionnementService {
             }
         }
 
+        log.info("📧 Envoi de {} emails à {} fournisseurs", 
+            articlesParFournisseur.size(), articlesParFournisseur.keySet().size());
+
         for (Map.Entry<Fournisseur, Map<Categorie, List<Medicament>>> entry : articlesParFournisseur.entrySet()) {
             Fournisseur fournisseur = entry.getKey();
             Map<Categorie, List<Medicament>> articlesParCategorie = entry.getValue();
@@ -55,10 +63,14 @@ public class ReapprovisionnementService {
 
             
         }
+        
+        log.info("✅ Traitement terminé");
     }
 
     private void envoyerMailFournisseur(Fournisseur fournisseur,
             Map<Categorie, List<Medicament>> articlesParCategorie) {
+        log.info("  📨 Envoi email à: {} ({})", fournisseur.getNom(), fournisseur.getEmail());
+        
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(fournisseur.getEmail());
         message.setSubject("Demande de devis - Réapprovisionnement Pharmacie");
@@ -84,8 +96,9 @@ public class ReapprovisionnementService {
 
         try {
             javaMailSender.send(message);
+            log.info("  ✅ Email envoyé avec succès à {}", fournisseur.getEmail());
         } catch (Exception e) {
-            log.error("Erreur lors de l'envoi de l'email à {}", fournisseur.getEmail(), e);
+            log.error("  ❌ Erreur lors de l'envoi de l'email à {}: {}", fournisseur.getEmail(), e.getMessage(), e);
         }
     }
 }
