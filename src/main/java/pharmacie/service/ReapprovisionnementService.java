@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,7 @@ import pharmacie.entity.Medicament;
 public class ReapprovisionnementService {
 
     private final MedicamentRepository medicamentRepository;
-    private final JavaMailSender javaMailSender;
+    private final SendGridEmailService sendGridEmailService;
 
     @Transactional(readOnly = true)
     public void envoyerDemandesDevis() {
@@ -71,9 +69,7 @@ public class ReapprovisionnementService {
             Map<Categorie, List<Medicament>> articlesParCategorie) {
         log.info("  📨 Envoi email à: {} ({})", fournisseur.getNom(), fournisseur.getEmail());
         
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(fournisseur.getEmail());
-        message.setSubject("Demande de devis - Réapprovisionnement Pharmacie");
+        String subject = "Demande de devis - Réapprovisionnement Pharmacie";
 
         StringBuilder text = new StringBuilder();
         text.append("Bonjour ").append(fournisseur.getNom()).append(",\n\n");
@@ -92,11 +88,9 @@ public class ReapprovisionnementService {
             }
             text.append("\n");
         }
-        message.setText(text.toString());
 
         try {
-            javaMailSender.send(message);
-            log.info("  ✅ Email envoyé avec succès à {}", fournisseur.getEmail());
+            sendGridEmailService.sendEmail(fournisseur.getEmail(), subject, text.toString());
         } catch (Exception e) {
             log.error("  ❌ Erreur lors de l'envoi de l'email à {}: {}", fournisseur.getEmail(), e.getMessage(), e);
         }

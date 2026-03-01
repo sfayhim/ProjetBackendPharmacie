@@ -183,7 +183,7 @@ INSERT INTO LIGNE (COMMANDE_NUMERO, MEDICAMENT_REFERENCE, QUANTITE) VALUES
 (8, 8, 100), (8, 18, 75), (8, 28, 80), (8, 38, 70), (8, 48, 60);
 
 INSERT INTO FOURNISSEUR (NOM, EMAIL) VALUES
-('fournisseur1', 'mahdisfayhi@gmail.com'),
+('fournisseur1', 'mahdi.sfayhi@etud.univ-jfc.fr'),
 ('fournisseur2', 'mahdisfayhi@gmail.com'),
 ('fournisseur3', 'mahdisfayhi@gmail.com'),
 ('fournisseur4', 'mahdisfayhi@gmail.com'),
