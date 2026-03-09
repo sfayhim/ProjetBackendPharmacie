@@ -49,7 +49,7 @@ public class Dispensaire {
     @Column(length = 24)
     private String fax;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dispensaire")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dispensaire", orphanRemoval = true)
     @ToString.Exclude
     @JsonIgnoreProperties({"dispensaire", "lignes"})
     private List<Commande> commandes = new ArrayList<>();

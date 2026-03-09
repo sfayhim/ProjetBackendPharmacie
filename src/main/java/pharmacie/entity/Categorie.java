@@ -44,4 +44,15 @@ public class Categorie {
 	@JsonIgnoreProperties("categories")
 	private List<Fournisseur> fournisseurs = new LinkedList<>();
 
+	/**
+	 * Avant la suppression d'une catégorie, on retire cette catégorie de tous les
+	 * fournisseurs liés, afin de nettoyer la table de jointure ManyToMany.
+	 */
+	@PreRemove
+	private void removeFromFournisseurs() {
+		for (Fournisseur f : fournisseurs) {
+			f.getCategories().remove(this);
+		}
+	}
+
 }
